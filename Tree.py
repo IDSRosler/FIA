@@ -5,25 +5,28 @@ class CriateTree(object):
     def __init__(self):
         estado = self.estado_inicial()
         self.root = Node.Node(estado,9)
-        self.completar_arvore(self.root, 9)
+        self.completar_arvore(self.root, 9, 0)
         return None
 
-    def completar_arvore(self, nodo, profundidade, i=0, x = 0):
+    def completar_arvore(self, nodo, profundidade, x):
         if profundidade == 0:
-            i += 1
-            x += 1
             return None
         else:
             novo = self.copia(nodo.estado)
             if (profundidade % 2) == 0:
-                self.marcar(novo,'O', i)
-                # i += 1
+                self.marcar(novo,'O', x)
                 nodo.filhos[x] = Node.Node(novo,profundidade-1)
+                self.completar_arvore(nodo.filhos[x], profundidade - 1, x)
+                if x < profundidade:
+                    self.completar_arvore(nodo.filhos[x], profundidade-1,x)
             else:
-                self.marcar(novo,'X', i)
-                # i += 1
+                self.marcar(novo,'X', x)
                 nodo.filhos[x] = Node.Node(novo, profundidade-1)
-            return self.completar_arvore(nodo.filhos[x],profundidade -1, i, x)
+                self.completar_arvore(nodo.filhos[x],profundidade -1, x)
+                if x < profundidade:
+                    self.completar_arvore(nodo.filhos[x], profundidade-1,x)
+        return None
+
 
     # def completar_arvore(self, node):
     #     aux  = []
