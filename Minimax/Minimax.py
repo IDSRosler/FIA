@@ -27,7 +27,7 @@ class Minimax(object):
                         nodo.filhos[i] = Node.Node(novo, 0)
 
     def minimax(self, nodo, profundidade, maximizador):
-        if nodo.profundidade == 0:
+        if nodo.profundidade == 1:
             return self.verificar(nodo.estado)
         elif maximizador == False:
             alpha = 3
@@ -96,7 +96,7 @@ class Minimax(object):
                 else:
                     return -1
         #Checar diagonais
-            if ((estado[0][0] == estado[1][1] == estado[2][2]) or (estado[0][2] == estado[1][1] == estado[2][0])) and estado[i][0] != '_':
+            if ((estado[0][0] == estado[1][1] == estado[2][2]) or (estado[0][2] == estado[1][1] == estado[2][0])) and estado[1][1] != '_':
                 if estado[0][0] == 'X':
                     return 1
                 else:
